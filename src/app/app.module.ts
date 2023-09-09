@@ -24,7 +24,9 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
 import { SettingsComponent } from './settings/settings.component';
-import {MatDialog, MatDialogModule} from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
+import {MatExpansionModule} from '@angular/material/expansion';
+import { UserInformationsComponent } from './settings/forms/user-informations/user-informations.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,7 @@ import {MatDialog, MatDialogModule} from '@angular/material/dialog';
     HomeComponent,
     HeaderComponent,
     SettingsComponent,
+    UserInformationsComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,7 +57,8 @@ import {MatDialog, MatDialogModule} from '@angular/material/dialog';
     MatNativeDateModule,
     MatCardModule,
     MatMenuModule,
-    MatDialogModule
+    MatDialogModule,
+    MatExpansionModule
   ],
   providers: [],
   bootstrap: [AppComponent],

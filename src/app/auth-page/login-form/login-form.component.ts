@@ -1,11 +1,8 @@
 import { Component } from '@angular/core';
-import {
-  AbstractControl,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { User } from 'src/app/models/user.model';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
 
 @Component({
   selector: 'app-login-form',
@@ -21,7 +18,10 @@ export class LoginFormComponent {
     password: new FormControl(''),
   });
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private localStorageService: LocalStorageService,
+  ) {}
   users: string[] = [];
   getErrorMessage(email: AbstractControl) {
     console.log(email);
@@ -39,29 +39,29 @@ export class LoginFormComponent {
   }
 
   onLogin(): void {
-    const users = JSON.parse(localStorage.getItem('users') || '[]');
+    const users = this.localStorageService.getUsers();
     const email = this.loginForm.value.email;
     const password = this.loginForm.value.password;
     const user = users.find((user: any) => user.email === email);
-    console.log(user);
-
     if (!user) {
       alert('Email not found, please register!');
     } else {
       if (user.password === password) {
         localStorage.setItem('loggedIn', 'true');
-        alert('You have successfully logged in!')
+        alert('You have successfully logged in!');
         this.router.navigate(['']);
       }
     }
-    
   }
 
   onSignUp(): void {
-    const users = JSON.parse(localStorage.getItem('users') || '[]');
-    users.push(this.loginForm.value);
-
-    localStorage.setItem('users', JSON.stringify(users));
-    console.log(this.loginForm.value);
+    const users = this.localStorageService.getUsers();
+    const user: User = {
+      email: this.loginForm.value.email || '',
+      password: this.loginForm.value.password || '',
+    };
+    users.push(user);
+    this.localStorageService.setUsers(users);
+    this.localStorageService.saveCurrentUser(user);
   }
 }
