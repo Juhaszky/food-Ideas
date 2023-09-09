@@ -40,23 +40,22 @@
   <div class="row text-center">
     <div class="col-sm-12 col-lg-6">
       <div class="row text-center">
-
         <button
-        type="submit"
-        class="btn btn-primary"
-        [disabled]="!loginForm.valid"
+          type="submit"
+          class="btn btn-primary"
+          [disabled]="!loginForm.valid"
+          (click)="isLoginMode ? onLogin() : onSignUp()"
         >
-        {{ isLoginMode ? "Login" : "Sign up" }}
-      </button>
-    </div>
+          {{ isLoginMode ? "Login" : "Sign up" }}
+        </button>
+      </div>
     </div>
     <div class="col-sm-12 col-lg-6">
       <div class="row">
-
         <mat-slide-toggle [color]="'primary'" (change)="switchMode()" class=""
-        >Switch to <br />{{
-          isLoginMode ? "Sign Up" : "Login"
-        }}!</mat-slide-toggle
+          >Switch to <br />{{
+            isLoginMode ? "Sign Up" : "Login"
+          }}!</mat-slide-toggle
         >
       </div>
     </div>
