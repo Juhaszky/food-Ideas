@@ -12,9 +12,29 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { HomeComponent } from './home/home.component';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatListModule } from '@angular/material/list';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { HeaderComponent } from './header/header/header.component';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatCardModule } from '@angular/material/card';
+import { MatMenuModule } from '@angular/material/menu';
+import { SettingsComponent } from './settings/settings.component';
+import {MatDialog, MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
-  declarations: [AppComponent, AuthPageComponent, LoginFormComponent],
+  declarations: [
+    AppComponent,
+    AuthPageComponent,
+    LoginFormComponent,
+    HomeComponent,
+    HeaderComponent,
+    SettingsComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -25,6 +45,16 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     MatIconModule,
     MatSlideToggleModule,
     NgbModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatListModule,
+    DragDropModule,
+    MatDividerModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatCardModule,
+    MatMenuModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent],
