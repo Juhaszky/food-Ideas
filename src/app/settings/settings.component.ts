@@ -31,10 +31,6 @@ export class SettingsComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.settingsForm);
-  }
-
-  alma() {
-    console.log('asdasdas');
+    //console.log(this.settingsForm);
   }
 }
