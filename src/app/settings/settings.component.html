@@ -1,9 +1,76 @@
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-xs-12">
-            <h3>Settings</h3>
-            <mat-divider></mat-divider>
-            asdasdasd
-        </div>
+<div class="container-fluid p-5">
+  <div class="row">
+    <h3>Settings</h3>
+  </div>
+  <mat-divider class="pb-3"></mat-divider>
+  <form [formGroup]="settingsForm" (ngSubmit)="onSubmit()">
+    <div class="row py-2">
+      <div class="row">
+        <label class="form-label" for="email">E-mail:</label>
+        <input
+          class="form-control"
+          type="email"
+          name="email"
+          formControlName="email"
+        />
+      </div>
+      <div class="row">
+        <label class="form-label" for="password">Password: </label>
+        <input
+          class="form-control"
+          type="password"
+          name="password"
+          formControlName="password"
+        />
+      </div>
     </div>
+    <div class="row py-3">
+      <mat-accordion>
+        <mat-expansion-panel
+          (opened)="panelOpenState = true"
+          (closed)="panelOpenState = false"
+        >
+          <mat-expansion-panel-header>
+            <mat-panel-title> Személyes adatok: </mat-panel-title>
+            <mat-panel-description>
+              Lakcím, Telefonszám, Születési év...
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <form formGroupName="userInformation">
+            <div class="row">
+              <label class="form-label" for="address">Address: </label>
+              <input
+                class="form-control"
+                type="text"
+                formControlName="address"
+              />
+            </div>
+            <div class="row">
+              <label for="address">Phone number: </label>
+              <input
+                class="form-control"
+                type="tel"
+                name="phoneNumber"
+                formControlName="phone"
+              />
+            </div>
+            <div class="row">
+              <label for="address">Birth: </label>
+              <input
+                class="form-control"
+                type="date"
+                name="birth"
+                formControlName="birth"
+              />
+            </div>
+          </form>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-lg-6">
+        <button class="btn btn-success" type="submit">Save</button>
+      </div>
+    </div>
+  </form>
 </div>
