@@ -36,7 +36,9 @@ export class HeaderComponent {
 
   toSettings() {
     const dialogRef = this.dialog.open(SettingsComponent, {
-      restoreFocus: false,
+      height: '80%',
+      width: '80%',
+      restoreFocus: true,
     });
 
     // Manually restore focus to the menu trigger since the element that
