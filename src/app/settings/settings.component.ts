@@ -9,7 +9,7 @@ import { FormControl, FormGroup } from '@angular/forms';
   styleUrls: ['./settings.component.scss'],
 })
 export class SettingsComponent implements OnInit {
-  //@ViewChild('settingsForm') settingsForm!: FormGroup;
+  @ViewChild('settingsFormEl') settingsFormformEl!: FormGroup;
   panelOpenState = false;
   //settingsForm!: FormGroup;
   userData!: User;
@@ -31,6 +31,10 @@ export class SettingsComponent implements OnInit {
   }
 
   onSubmit() {
-    //console.log(this.settingsForm);
+    if (this.settingsForm.valid) {
+      if (this.settingsForm.value.email && this.settingsForm.value.password) {
+        this.settingsService.saveUserData(this.settingsForm);
+      }
+    }
   }
 }

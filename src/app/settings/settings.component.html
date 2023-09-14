@@ -3,10 +3,10 @@
     <h3>Settings</h3>
   </div>
   <mat-divider class="pb-3"></mat-divider>
-  <form [formGroup]="settingsForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="settingsForm" #settingsFormEl (ngSubmit)="onSubmit()">
     <div class="row py-2">
       <div class="row">
-        <label class="form-label" for="email">E-mail:</label>
+        <label class="form-label">E-mail:</label>
         <input
           class="form-control"
           type="email"
@@ -15,7 +15,7 @@
         />
       </div>
       <div class="row">
-        <label class="form-label" for="password">Password: </label>
+        <label class="form-label">Password: </label>
         <input
           class="form-control"
           type="password"
@@ -38,7 +38,7 @@
           </mat-expansion-panel-header>
           <form formGroupName="userInformation">
             <div class="row">
-              <label class="form-label" for="address">Address: </label>
+              <label class="form-label">Address: </label>
               <input
                 class="form-control"
                 type="text"
@@ -46,7 +46,7 @@
               />
             </div>
             <div class="row">
-              <label for="address">Phone number: </label>
+              <label>Phone number: </label>
               <input
                 class="form-control"
                 type="tel"
@@ -55,7 +55,7 @@
               />
             </div>
             <div class="row">
-              <label for="address">Birth: </label>
+              <label>Birth: </label>
               <input
                 class="form-control"
                 type="date"
