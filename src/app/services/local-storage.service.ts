@@ -20,4 +20,9 @@ export class LocalStorageService {
   getCurrentUser(): User {
     return JSON.parse(localStorage.getItem('currentUser') || '');
   }
+
+  getNickName(): string {
+    const user = this.getCurrentUser();
+    return user.nickName ?? '';
+  }
 }

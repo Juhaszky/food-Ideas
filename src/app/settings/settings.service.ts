@@ -16,6 +16,7 @@ export class SettingsService {
     const user: User = {
       email: formData.value.email,
       password: formData.value.password,
+      nickName: formData.value.nickName,
       address: formData.value.userInformation.address ?? '',
       phoneNumber: formData.value.userInformation.phoneNumber ?? '',
       birth: formData.value.userInformation.birth ?? '',

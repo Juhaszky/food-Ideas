@@ -17,6 +17,7 @@ export class SettingsComponent implements OnInit {
   settingsForm = new FormGroup({
     email: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required),
+    nickName: new FormControl(''),
     userInformation: new FormGroup({
       address: new FormControl(''),
       phone: new FormControl(''),
