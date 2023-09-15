@@ -1,7 +1,13 @@
 import { Component, OnChanges, OnInit, Output, ViewChild } from '@angular/core';
 import { SettingsService } from './settings.service';
 import { User } from '../models/user.model';
-import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import { HomeService } from '../home/home.service';
 
 @Component({
   selector: 'app-settings',
@@ -12,7 +18,7 @@ export class SettingsComponent implements OnInit {
   panelOpenState = false;
   //settingsForm!: FormGroup;
   userData!: User;
-  
+
   formChanged = false;
   settingsForm = new FormGroup({
     email: new FormControl('', Validators.required),
@@ -24,9 +30,12 @@ export class SettingsComponent implements OnInit {
       birth: new FormControl(''),
     }),
   });
-  
-  constructor(private settingsService: SettingsService) {}
-  
+
+  constructor(
+    private settingsService: SettingsService,
+    private homeService: HomeService,
+  ) {}
+
   ngOnInit(): void {
     this.userData = this.settingsService.getUserData();
     this.settingsForm.get('email')?.setValue(this.userData.email);
@@ -41,10 +50,12 @@ export class SettingsComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.settingsForm.valid);
     if (this.settingsForm.valid) {
       if (this.settingsForm.value.email && this.settingsForm.value.password) {
         this.settingsService.saveUserData(this.settingsForm);
+        this.homeService.nickNameSubject.next(
+          this.settingsForm.value.nickName ?? '',
+        );
       }
     }
   }
