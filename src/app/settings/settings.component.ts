@@ -1,7 +1,7 @@
-import { Component, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, OnChanges, OnInit, Output, ViewChild } from '@angular/core';
 import { SettingsService } from './settings.service';
 import { User } from '../models/user.model';
-import { FormControl, FormGroup } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-settings',
@@ -9,28 +9,38 @@ import { FormControl, FormGroup } from '@angular/forms';
   styleUrls: ['./settings.component.scss'],
 })
 export class SettingsComponent implements OnInit {
-  @ViewChild('settingsFormEl') settingsFormformEl!: FormGroup;
   panelOpenState = false;
   //settingsForm!: FormGroup;
   userData!: User;
-  constructor(private settingsService: SettingsService) {}
+  
+  formChanged = false;
   settingsForm = new FormGroup({
-    email: new FormControl(''),
-    password: new FormControl(''),
+    email: new FormControl('', Validators.required),
+    password: new FormControl('', Validators.required),
     userInformation: new FormGroup({
       address: new FormControl(''),
       phone: new FormControl(''),
       birth: new FormControl(''),
     }),
   });
-
+  
+  constructor(private settingsService: SettingsService) {}
+  
   ngOnInit(): void {
     this.userData = this.settingsService.getUserData();
     this.settingsForm.get('email')?.setValue(this.userData.email);
     this.settingsForm.get('password')?.setValue(this.userData.password);
+    const originalValues = this.settingsForm.value;
+    this.settingsForm.valueChanges.subscribe((formData: any) => {
+      this.formChanged = !this.settingsService.isFormDataEqual(
+        originalValues,
+        formData,
+      );
+    });
   }
 
   onSubmit() {
+    console.log(this.settingsForm.valid);
     if (this.settingsForm.valid) {
       if (this.settingsForm.value.email && this.settingsForm.value.password) {
         this.settingsService.saveUserData(this.settingsForm);

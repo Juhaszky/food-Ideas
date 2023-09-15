@@ -23,4 +23,8 @@ export class SettingsService {
     //userData.address = formData?.address ?? '';
     return this.localStorageService.saveCurrentUser(user);
   }
+
+  isFormDataEqual(formDataStart: any, changedFormData: any): boolean {
+    return JSON.stringify(formDataStart) === JSON.stringify(changedFormData);
+  }
 }

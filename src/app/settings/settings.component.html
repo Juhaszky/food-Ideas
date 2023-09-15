@@ -3,7 +3,7 @@
     <h3>Settings</h3>
   </div>
   <mat-divider class="pb-3"></mat-divider>
-  <form [formGroup]="settingsForm" #settingsFormEl (ngSubmit)="onSubmit()">
+  <form [formGroup]="settingsForm" (ngSubmit)="onSubmit()">
     <div class="row py-2">
       <div class="row">
         <label class="form-label">E-mail:</label>
@@ -21,6 +21,7 @@
           type="password"
           name="password"
           formControlName="password"
+          minlength="6"
         />
       </div>
     </div>
@@ -69,7 +70,13 @@
     </div>
     <div class="row">
       <div class="col-xs-12 col-lg-6">
-        <button class="btn btn-success" type="submit">Save</button>
+        <button
+          class="btn btn-success"
+          [disabled]="!formChanged || !settingsForm.valid"
+          type="submit"
+        >
+          Save
+        </button>
       </div>
     </div>
   </form>
