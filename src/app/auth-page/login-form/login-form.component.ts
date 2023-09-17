@@ -61,7 +61,8 @@ export class LoginFormComponent {
       password: this.loginForm.value.password || '',
       address: undefined,
       phoneNumber: undefined,
-      birth: undefined
+      birth: undefined,
+      nickName: undefined,
     };
     users.push(user);
     this.localStorageService.setUsers(users);
