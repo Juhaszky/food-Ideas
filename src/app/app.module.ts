@@ -26,7 +26,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { SettingsComponent } from './settings/settings.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import {MatExpansionModule} from '@angular/material/expansion';
-import { UserInformationsComponent } from './settings/forms/user-informations/user-informations.component';
+
 
 @NgModule({
   declarations: [
@@ -36,7 +36,6 @@ import { UserInformationsComponent } from './settings/forms/user-informations/us
     HomeComponent,
     HeaderComponent,
     SettingsComponent,
-    UserInformationsComponent,
   ],
   imports: [
     BrowserModule,
