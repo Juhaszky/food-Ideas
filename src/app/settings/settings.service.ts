@@ -28,4 +28,15 @@ export class SettingsService {
   isFormDataEqual(formDataStart: any, changedFormData: any): boolean {
     return JSON.stringify(formDataStart) === JSON.stringify(changedFormData);
   }
+
+  fillFormData(form: FormGroup): void {
+    const userData = this.getUserData();
+
+    form.get('email')?.setValue(userData.email);
+    form.get('password')?.setValue(userData.password);
+    form.get('nickName')?.setValue(userData.nickName);
+    form.get('address')?.setValue(userData.address);
+    form.get('phoneNumber')?.setValue(userData.phoneNumber);
+    form.get('birth')?.setValue(userData.birth);
+  }
 }

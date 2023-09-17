@@ -8,6 +8,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { HomeService } from '../home/home.service';
+import { birthValidator } from '../shared/birth.validator.directive';
 
 @Component({
   selector: 'app-settings',
@@ -27,7 +28,7 @@ export class SettingsComponent implements OnInit {
     userInformation: new FormGroup({
       address: new FormControl(''),
       phone: new FormControl(''),
-      birth: new FormControl(''),
+      birth: new FormControl('', [birthValidator()]),
     }),
   });
 
@@ -37,9 +38,7 @@ export class SettingsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.userData = this.settingsService.getUserData();
-    this.settingsForm.get('email')?.setValue(this.userData.email);
-    this.settingsForm.get('password')?.setValue(this.userData.password);
+    this.settingsService.fillFormData(this.settingsForm);
     const originalValues = this.settingsForm.value;
     this.settingsForm.valueChanges.subscribe((formData: any) => {
       this.formChanged = !this.settingsService.isFormDataEqual(
