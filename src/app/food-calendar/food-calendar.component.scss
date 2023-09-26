@@ -1,0 +1,15 @@
+.calendar-day :hover {
+    background-color: rgb(187, 248, 89);
+}
+
+.clicked-day {
+    background-color: rgb(68, 252, 138);
+}
+
+.box {
+    border: gray 1px solid;
+    border-radius: 1rem;
+    &:hover{ 
+        cursor: pointer;
+    }
+}

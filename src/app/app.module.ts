@@ -25,8 +25,13 @@ import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
 import { SettingsComponent } from './settings/settings.component';
 import { MatDialogModule } from '@angular/material/dialog';
-import {MatExpansionModule} from '@angular/material/expansion';
-
+import { MatExpansionModule } from '@angular/material/expansion';
+import { FoodCalendarComponent } from './food-calendar/food-calendar.component';
+import { CalendarBoxComponent } from './food-calendar/calendar-box/calendar-box.component';
+import { DatePipe } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { MatSelectModule } from '@angular/material/select';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -36,6 +41,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
     HomeComponent,
     HeaderComponent,
     SettingsComponent,
+    FoodCalendarComponent,
+    CalendarBoxComponent,
   ],
   imports: [
     BrowserModule,
@@ -57,9 +64,12 @@ import {MatExpansionModule} from '@angular/material/expansion';
     MatCardModule,
     MatMenuModule,
     MatDialogModule,
-    MatExpansionModule
+    MatExpansionModule,
+    FormsModule,
+    MatSelectModule,
+    MatTooltipModule
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
