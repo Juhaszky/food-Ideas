@@ -1,4 +1,4 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, OnDestroy, OnInit, Output } from '@angular/core';
 import { CalendarService } from './calendar.service';
 import { Month } from '../models/calendar.model';
 import { MatSelectChange } from '@angular/material/select';
@@ -8,7 +8,7 @@ import { MatSelectChange } from '@angular/material/select';
   templateUrl: './food-calendar.component.html',
   styleUrls: ['./food-calendar.component.scss'],
 })
-export class FoodCalendarComponent implements OnInit {
+export class FoodCalendarComponent implements OnInit, OnDestroy {
   calendarData: Month[] = [];
   clickedDays: Date[] = [];
   @Output() selectedMonth: Month = this.calendarData[0];
@@ -23,6 +23,10 @@ export class FoodCalendarComponent implements OnInit {
       .subscribe(months => (this.calendarData = months));
 
     this.selectedMonth = this.calendarData[0];
+  }
+
+  ngOnDestroy(): void {
+    this.calendarService.daySubject.unsubscribe();
   }
 
   onChange(event: MatSelectChange) {
