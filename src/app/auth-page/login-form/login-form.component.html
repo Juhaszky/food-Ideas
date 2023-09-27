@@ -1,0 +1,63 @@
+<form [formGroup]="loginForm" class="p-3 container">
+  <div class="row">
+    <h1 class="w-100 text-center">Food-Ideas</h1>
+  </div>
+  <div class="row">
+    <mat-form-field class="my-3">
+      <mat-label>Enter your email</mat-label>
+      <input
+        matInput
+        placeholder="pat@example.com"
+        formControlName="email"
+        name="email"
+        required
+      />
+      <mat-error *ngIf="loginForm.get('email')?.invalid"
+        >Invalid email</mat-error
+      >
+    </mat-form-field>
+  </div>
+  <div class="row">
+    <mat-form-field class="mb-3">
+      <mat-label>Enter your password</mat-label>
+      <input
+        matInput
+        [type]="hide ? 'password' : 'text'"
+        formControlName="password"
+      />
+      <button
+        mat-icon-button
+        matSuffix
+        (click)="hide = !hide"
+        [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hide"
+        type="button"
+      >
+        <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+  <div class="row text-center">
+    <div class="col-sm-12 col-lg-6">
+      <div class="row text-center">
+        <button
+          type="submit"
+          class="btn btn-primary"
+          [disabled]="!loginForm.valid"
+          (click)="isLoginMode ? onLogin() : onSignUp()"
+        >
+          {{ isLoginMode ? "Login" : "Sign up" }}
+        </button>
+      </div>
+    </div>
+    <div class="col-sm-12 col-lg-6">
+      <div class="row">
+        <mat-slide-toggle [color]="'primary'" (change)="switchMode()" class=""
+          >Switch to <br />{{
+            isLoginMode ? "Sign Up" : "Login"
+          }}!</mat-slide-toggle
+        >
+      </div>
+    </div>
+  </div>
+</form>

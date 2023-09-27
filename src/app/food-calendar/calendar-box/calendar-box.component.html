@@ -1,0 +1,9 @@
+<div
+  class="row calendar-day justify-content-center text-center {{
+    dayClicked ? 'clicked-day' : ''
+  }}"
+  (click)="clicked()">
+  <div class="box">
+    <h4>{{ formattedDate }}</h4>
+  </div>
+</div>
