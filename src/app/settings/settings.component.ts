@@ -24,8 +24,8 @@ export class SettingsComponent implements OnInit {
   settingsForm = new FormGroup({
     email: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required),
-    nickName: new FormControl(''),
     userInformation: new FormGroup({
+      nickName: new FormControl(''),
       address: new FormControl(''),
       phone: new FormControl(''),
       birth: new FormControl('', [birthValidator()]),
@@ -50,10 +50,11 @@ export class SettingsComponent implements OnInit {
 
   onSubmit() {
     if (this.settingsForm.valid) {
-      if (this.settingsForm.value.email && this.settingsForm.value.password) {
+      const userInformation = this.settingsForm.get('userInformation');
+      if (userInformation &&this.settingsForm.value.email && this.settingsForm.value.password) {
         this.settingsService.saveUserData(this.settingsForm);
         this.homeService.nickNameSubject.next(
-          this.settingsForm.value.nickName ?? '',
+          userInformation.get('nickName')?.value ?? '',
         );
       }
     }

@@ -11,8 +11,7 @@
           class="form-control"
           type="email"
           name="email"
-          formControlName="email"
-        />
+          formControlName="email" />
       </div>
       <div class="row">
         <label class="form-label">Password: </label>
@@ -21,59 +20,48 @@
           type="password"
           name="password"
           formControlName="password"
-          minlength="6"
-        />
-      </div>
-      <div class="row">
-        <label>Nickname: </label>
-        <input
-          class="form-control"
-          type="text"
-          name="nickName"
-          formControlName="nickName"
-        />
+          minlength="6" />
       </div>
     </div>
     <div class="row py-3">
-      <mat-accordion>
+      <mat-accordion formGroupName="userInformation">
         <mat-expansion-panel
           (opened)="panelOpenState = true"
-          (closed)="panelOpenState = false"
-        >
+          (closed)="panelOpenState = false">
           <mat-expansion-panel-header>
             <mat-panel-title> Személyes adatok: </mat-panel-title>
             <mat-panel-description>
               Lakcím, Telefonszám, Születési év...
             </mat-panel-description>
           </mat-expansion-panel-header>
-          <form formGroupName="userInformation">
-            <div class="row">
-              <label class="form-label">Address: </label>
-              <input
-                class="form-control"
-                type="text"
-                formControlName="address"
-              />
-            </div>
-            <div class="row">
-              <label>Phone number: </label>
-              <input
-                class="form-control"
-                type="tel"
-                name="phoneNumber"
-                formControlName="phone"
-              />
-            </div>
-            <div class="row">
-              <label>Birth: </label>
-              <input
-                class="form-control"
-                type="date"
-                name="birth"
-                formControlName="birth"
-              />
-            </div>
-          </form>
+          <div class="row">
+            <label>Nickname: </label>
+            <input
+              class="form-control"
+              type="text"
+              name="nickName"
+              formControlName="nickName" />
+          </div>
+          <div class="row">
+            <label class="form-label">Address: </label>
+            <input class="form-control" type="text" formControlName="address" />
+          </div>
+          <div class="row">
+            <label>Phone number: </label>
+            <input
+              class="form-control"
+              type="tel"
+              name="phoneNumber"
+              formControlName="phone" />
+          </div>
+          <div class="row">
+            <label>Birth: </label>
+            <input
+              class="form-control"
+              type="date"
+              name="birth"
+              formControlName="birth" />
+          </div>
         </mat-expansion-panel>
       </mat-accordion>
     </div>
@@ -82,8 +70,7 @@
         <button
           class="btn btn-success"
           [disabled]="!formChanged || !settingsForm.valid"
-          type="submit"
-        >
+          type="submit">
           Save
         </button>
       </div>
