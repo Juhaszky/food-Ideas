@@ -37,6 +37,18 @@
           }
         }
       }
-    }
+    },
+    {
+      "label": "build",
+      "command": "dotnet",
+      "type": "process",
+      "args": [
+                "build",
+                "${workspaceFolder}/food-ideas-API/food-ideas-API.csproj"
+              ],
+      "problemMatcher": "$msCompile"
+          
+      
+  }
   ]
 }
