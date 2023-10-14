@@ -1,7 +1,7 @@
-import { ElementRef, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { Day, Food, Month } from '../models/calendar.model';
-import { BehaviorSubject, Observable, Subject, fromEvent, of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +9,6 @@ import { BehaviorSubject, Observable, Subject, fromEvent, of } from 'rxjs';
 export class CalendarService {
   selectedDay!: Day;
   selectedMonthIdx: number = 0;
-  private selectedMonthIndexSubject: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   constructor(private datePipe: DatePipe) {}
 
   onSelectDay(date: Day) {
