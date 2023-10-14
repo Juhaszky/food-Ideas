@@ -1,14 +1,24 @@
-import { Injectable } from '@angular/core';
+import { ElementRef, Injectable } from '@angular/core';
 import { DatePipe } from '@angular/common';
-import { Day, Event, Month } from '../models/calendar.model';
-import { Observable, Subject, of } from 'rxjs';
+import { Day, Food, Month } from '../models/calendar.model';
+import { BehaviorSubject, Observable, Subject, fromEvent, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CalendarService {
-  daySubject = new Subject<Date>();
+  selectedDay!: Day;
+  selectedMonthIdx: number = 0;
+  private selectedMonthIndexSubject: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   constructor(private datePipe: DatePipe) {}
+
+  onSelectDay(date: Day) {
+    console.log('alma done');
+    return date;
+  }
+  setSelectedMonth(idx: number) {
+    this.selectedMonthIdx = idx;
+  }
 
   generateMonths(): Observable<Month[]> {
     const months: Month[] = [];
@@ -24,19 +34,29 @@ export class CalendarService {
     return of(months);
   }
 
-
-
   private genereateDaysInMonth(date: Date): Day[] {
     const daysInMonth: number = this.getDaysInMonth(date);
     const days: Day[] = [];
 
     for (let i = 1; i <= daysInMonth; i++) {
       const dayDate = new Date(date.getFullYear(), date.getMonth(), i);
-      const events: Event[] = [];
+      const foods: Food[] = [];
 
-      days.push({ date: dayDate, events });
+      const foodAmount = this.generateRandomFoodAmount();
+      for (let i = 0; i < foodAmount; i++) {
+        const food: Food = {
+          name: 'Teszt Kaja',
+          ingredients: [{ name: 'Paradicsom', amount: 1 }],
+        };
+        foods.push(food);
+      }
+      days.push({ date: dayDate, foods });
     }
     return days;
+  }
+  private generateRandomFoodAmount() {
+    const rnd = Math.floor(Math.random() * 15);
+    return rnd;
   }
   private getDaysInMonth(date: Date): number {
     const lastDayOfMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0);

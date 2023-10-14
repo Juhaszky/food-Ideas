@@ -1,7 +1,8 @@
 import { Component, OnDestroy, OnInit, Output } from '@angular/core';
 import { CalendarService } from './calendar.service';
-import { Month } from '../models/calendar.model';
+import {  Month } from '../models/calendar.model';
 import { MatSelectChange } from '@angular/material/select';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-food-calendar',
@@ -11,26 +12,31 @@ import { MatSelectChange } from '@angular/material/select';
 export class FoodCalendarComponent implements OnInit, OnDestroy {
   calendarData: Month[] = [];
   clickedDays: Date[] = [];
-  @Output() selectedMonth: Month = this.calendarData[0];
+  toolTipText: string = '';
+  selectedMonthIdx!: number;
+  private subscriptions: Subscription[] = [];
+  @Output() selectedMonth!: Month;
+
   constructor(private calendarService: CalendarService) {}
+
   ngOnInit(): void {
-    this.calendarService.daySubject.subscribe((day: Date) => {
-      this.clickedDays.push(day);
-      console.log(this.clickedDays);
-    });
-    this.calendarService
+    const sub = this.calendarService
       .generateMonths()
       .subscribe(months => (this.calendarData = months));
-
-    this.selectedMonth = this.calendarData[0];
+    this.subscriptions.push(sub);
+    this.selectedMonthIdx = this.calendarService.selectedMonthIdx;
+    this.selectedMonth = this.calendarData[this.selectedMonthIdx ?? 0];
+    this.calendarService.setSelectedMonth(this.selectedMonthIdx);
   }
 
   ngOnDestroy(): void {
-    this.calendarService.daySubject.unsubscribe();
+    this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 
   onChange(event: MatSelectChange) {
     const monthIdx = event.value;
+    this.selectedMonthIdx = monthIdx;
     this.selectedMonth = this.calendarData[monthIdx];
+    this.calendarService.setSelectedMonth(monthIdx);
   }
 }
