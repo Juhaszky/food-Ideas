@@ -32,6 +32,7 @@ import { DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { LoaderComponent } from './shared/common/loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     SettingsComponent,
     FoodCalendarComponent,
     CalendarBoxComponent,
+    LoaderComponent,
   ],
   imports: [
     BrowserModule,
@@ -67,7 +69,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatExpansionModule,
     FormsModule,
     MatSelectModule,
-    MatTooltipModule
+    MatTooltipModule,
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent],
