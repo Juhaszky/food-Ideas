@@ -1,9 +1,11 @@
 <app-header></app-header>
-<div class="container">
-  <mat-divider></mat-divider>
-  <div class="row my-3">
+<loader></loader>
+<div *ngIf="!loading" class="container p-3">
+  <div class="row mb-3">
     <div class="col-xs-12">
-      <h1>Welcome back <strong *ngIf="nickName">{{nickName}}!</strong></h1>
+      <h1>
+        Welcome back <strong *ngIf="nickName">{{ nickName }}!</strong>
+      </h1>
     </div>
   </div>
   <mat-divider class="pb-2"></mat-divider>
