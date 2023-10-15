@@ -32,7 +32,10 @@ import { DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { FoodComponent } from './food-calendar/food/food.component';
 import { LoaderComponent } from './shared/common/loader/loader.component';
+import { HttpClientModule } from '@angular/common/http';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -44,6 +47,7 @@ import { LoaderComponent } from './shared/common/loader/loader.component';
     SettingsComponent,
     FoodCalendarComponent,
     CalendarBoxComponent,
+    FoodComponent,
     LoaderComponent,
   ],
   imports: [
@@ -70,6 +74,8 @@ import { LoaderComponent } from './shared/common/loader/loader.component';
     FormsModule,
     MatSelectModule,
     MatTooltipModule,
+    HttpClientModule,
+    MatPaginatorModule,
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent],

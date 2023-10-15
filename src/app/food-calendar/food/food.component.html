@@ -1,0 +1,36 @@
+<app-header></app-header>
+<div class="container h-100">
+  <loader></loader>
+  <div *ngIf="!loading" class="box">
+    <div class="row">
+      <h1>Foods on day:</h1>
+    </div>
+    <div class="row">
+      <div class="col-lg-2">
+        <button (click)="back()">Go->back</button>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div *ngIf="day" class="col-md-6 col-xs-12">
+        <div *ngIf="day.foods.length > 0" class="food-box">
+          <div *ngFor="let food of currentFoods" class="row">
+            <h5>{{ food.name }}</h5>
+            <p *ngFor="let ingredient of food.ingredients">
+              {{ ingredient.name }} - {{ ingredient.amount }}
+            </p>
+          </div>
+          <mat-paginator
+            (page)="handlePageEvnt($event)"
+            [length]="day.foods.length"
+            [pageSize]="5"
+            [pageSizeOptions]="[5]"
+            aria-label="Select page">
+          </mat-paginator>
+        </div>
+        <div *ngIf="currentFoods && currentFoods.length === 0">
+          No food available.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
