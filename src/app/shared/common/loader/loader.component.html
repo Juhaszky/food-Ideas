@@ -1,6 +1,5 @@
-<div *ngIf="loading">
-  <div
-    class="spinner lds-ring">
+<div *ngIf="loadingService.globalSpinner$ | async">
+  <div class="spinner lds-ring">
     <div></div>
     <div></div>
     <div></div>

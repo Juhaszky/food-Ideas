@@ -1,22 +1,14 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component } from '@angular/core';
 import { LoaderService } from './loader.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'loader',
   templateUrl: './loader.component.html',
   styleUrls: ['./loader.component.scss'],
+  standalone: true,
+  imports: [CommonModule],
 })
-export class LoaderComponent implements OnInit, OnDestroy {
-  loading = false;
-  private subscription!: Subscription;
-  constructor(private loadingService: LoaderService) {}
-  ngOnInit(): void {
-    this.subscription = this.loadingService.loading.subscribe(
-      loading => (this.loading = loading)
-    );
-  }
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
-  }
+export class LoaderComponent {
+  constructor(public loadingService: LoaderService) {}
 }

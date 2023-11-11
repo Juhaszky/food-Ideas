@@ -5,6 +5,10 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { HomeService } from './home.service';
 import { Subscription } from 'rxjs';
 import { LoaderService } from '../shared/common/loader/loader.service';
+import { FoodCalendarComponent } from '../food-calendar/food-calendar.component';
+import { LoaderComponent } from '../shared/common/loader/loader.component';
+import { MatDivider, MatDividerModule } from '@angular/material/divider';
+import { CommonModule } from '@angular/common';
 
 const today = new Date();
 const month = today.getMonth();
@@ -15,6 +19,9 @@ const year = today.getFullYear();
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
   providers: [CdkDrag],
+  standalone: true,
+  imports: [FoodCalendarComponent, LoaderComponent, MatDividerModule, CommonModule]
+  
 })
 export class HomeComponent implements OnInit, OnDestroy {
   selected!: Date | null;

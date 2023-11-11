@@ -1,24 +1,26 @@
-import { Component, Input } from '@angular/core';
+import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { Day } from 'src/app/models/calendar.model';
-import { CalendarService } from '../calendar.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-calendar-box',
   templateUrl: './calendar-box.component.html',
   styleUrls: ['./calendar-box.component.scss'],
+  standalone: true
 })
 export class CalendarBoxComponent {
+  @ViewChild('day') dayEl!: ElementRef;
   @Input() day!: Day;
   formattedDate!: string;
   dayClicked = false;
-  constructor(private calendarService: CalendarService) {}
+  constructor(private router: Router) {}
 
   ngOnInit() {
     this.formattedDate = JSON.stringify(this.day.date.getDate());
   }
 
-  clicked() {
-    this.dayClicked = !this.dayClicked;
-    this.calendarService.daySubject.next(this.day.date);
+  selectDay() {
+    const date = JSON.stringify(this.day.date);
+    this.router.navigate(['/food', JSON.stringify(this.day)]);
   }
 }

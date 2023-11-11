@@ -1,18 +1,23 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, map } from 'rxjs';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class LoaderService {
-  private loadingSubject = new BehaviorSubject<boolean>(false);
-  loading = this.loadingSubject.asObservable();
-  constructor() {}
+  private _globalSpinner$ = new BehaviorSubject(false);
+  public globalSpinner$ = this._globalSpinner$.asObservable();
+  private _spinnerCount = 0;
 
-  showLoader() {
-    this.loadingSubject.next(true);
+  constructor() {}
+  showLoader(): void {
+    this._spinnerCount++;
+    this._globalSpinner$.next(true);
   }
-  hideLoader() {
-    this.loadingSubject.next(false);
+  hideLoader(): void {
+    this._spinnerCount--;
+    if (this._spinnerCount <= 0) this.resetLoader();
+  }
+  resetLoader() {
+    this._spinnerCount = 0;
+    this._globalSpinner$.next(false);
   }
 }

@@ -1,13 +1,22 @@
 import { Component, OnDestroy, OnInit, Output } from '@angular/core';
 import { CalendarService } from './calendar.service';
 import {  Month } from '../models/calendar.model';
-import { MatSelectChange } from '@angular/material/select';
+import { MatSelectChange, MatSelectModule } from '@angular/material/select';
 import { Subscription } from 'rxjs';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { CommonModule } from '@angular/common';
+import { CalendarBoxComponent } from './calendar-box/calendar-box.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-food-calendar',
   templateUrl: './food-calendar.component.html',
   styleUrls: ['./food-calendar.component.scss'],
+  standalone: true,
+  imports: [MatFormFieldModule, MatInputModule, CommonModule, CalendarBoxComponent, MatToolbarModule, MatSelectModule, MatTooltipModule],
+  
 })
 export class FoodCalendarComponent implements OnInit, OnDestroy {
   calendarData: Month[] = [];
@@ -20,6 +29,9 @@ export class FoodCalendarComponent implements OnInit, OnDestroy {
   constructor(private calendarService: CalendarService) {}
 
   ngOnInit(): void {
+    this.calendarService.daySelect.asObservable().subscribe((day) => {
+      console.log(day);
+    });
     const sub = this.calendarService
       .generateMonths()
       .subscribe(months => (this.calendarData = months));

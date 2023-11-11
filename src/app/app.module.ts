@@ -26,29 +26,26 @@ import { MatMenuModule } from '@angular/material/menu';
 import { SettingsComponent } from './settings/settings.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { FoodCalendarComponent } from './food-calendar/food-calendar.component';
-import { CalendarBoxComponent } from './food-calendar/calendar-box/calendar-box.component';
 import { DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { FoodComponent } from './food-calendar/food/food.component';
+
 import { LoaderComponent } from './shared/common/loader/loader.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { FoodCardComponent } from './food-calendar/food/food-card/food-card.component';
+import { LoaderService } from './shared/common/loader/loader.service';
+import { FoodCalendarComponent } from './food-calendar/food-calendar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AuthPageComponent,
     LoginFormComponent,
-    HomeComponent,
     HeaderComponent,
     SettingsComponent,
-    FoodCalendarComponent,
-    CalendarBoxComponent,
-    FoodComponent,
-    LoaderComponent,
+    FoodCardComponent,
   ],
   imports: [
     BrowserModule,
@@ -76,8 +73,10 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatTooltipModule,
     HttpClientModule,
     MatPaginatorModule,
+    LoaderComponent,
+
   ],
-  providers: [DatePipe],
+  providers: [DatePipe, LoaderService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

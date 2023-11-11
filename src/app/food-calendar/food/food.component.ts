@@ -1,16 +1,19 @@
 import { Component } from '@angular/core';
-import { Location } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { Day, Food } from 'src/app/models/calendar.model';
 import { CalendarService } from '../calendar.service';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { LoaderService } from 'src/app/shared/common/loader/loader.service';
-import { PageEvent } from '@angular/material/paginator';
+import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
+import { LoaderComponent } from 'src/app/shared/common/loader/loader.component';
 
 @Component({
   selector: 'app-food',
   templateUrl: './food.component.html',
   styleUrls: ['./food.component.scss'],
+  standalone: true,
+  imports: [MatPaginatorModule, CommonModule, LoaderComponent]
 })
 export class FoodComponent {
   day: Day = this.calendarService.selectedDay;
@@ -23,19 +26,20 @@ export class FoodComponent {
     private location: Location,
     private calendarService: CalendarService,
     private activatedRoute: ActivatedRoute,
-    private loaderService: LoaderService
+    public loaderService: LoaderService
   ) {}
   ngOnInit() {
+    
     this.activatedRoute.paramMap.subscribe(params => {
       if (params.has('date')) {
+        console.log(params);
         this.day = JSON.parse(params.get('date') || '{}');
         this.foods = this.day.foods;
       }
     });
     this.loaderService.showLoader();
-    this.loading = true;
+
     setTimeout(() => {
-      this.loading = false;
       this.loaderService.hideLoader();
     }, 700);
     this.currentFoods = this.foods.slice(0, 5);
