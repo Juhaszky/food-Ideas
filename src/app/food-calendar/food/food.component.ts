@@ -9,6 +9,9 @@ import { LoaderComponent } from 'src/app/shared/common/loader/loader.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { CreateFoodComponent } from './create-food/create-food.component';
 import { FoodService } from './food.service';
+import { FoodCardComponent } from './food-card/food-card.component';
+import { PaginatorComponent } from './paginator/paginator.component';
+import { currentFoodsStore } from './currentFoods.store.';
 @Component({
   selector: 'app-food',
   templateUrl: './food.component.html',
@@ -20,6 +23,8 @@ import { FoodService } from './food.service';
     LoaderComponent,
     MatSidenavModule,
     CreateFoodComponent,
+    FoodCardComponent,
+    PaginatorComponent,
   ],
 })
 export class FoodComponent {
@@ -28,12 +33,12 @@ export class FoodComponent {
   daySubscription!: Subscription;
   currentPageIdx!: number;
   foods: Food[] = [];
-  currentFoods: Food[] = [];
   constructor(
     private location: Location,
     private activatedRoute: ActivatedRoute,
     public loaderService: LoaderService,
     private foodService: FoodService,
+    public currentFoodsStorage: currentFoodsStore
   ) {}
   ngOnInit() {
     this.foods = [];
@@ -43,7 +48,7 @@ export class FoodComponent {
 
         this.foodService.getFoodByDate(this.day).subscribe(food => {
           this.foods.push(...food);
-          this.currentFoods = this.foods.slice(0, 5);
+          this.currentFoodsStorage.currentFoods = this.foods.slice(0, 5);
         });
       }
     });
@@ -53,17 +58,10 @@ export class FoodComponent {
     setTimeout(() => {
       this.loaderService.hideLoader();
     }, 700);
-    this.currentFoods = this.foods.slice(0, 5);
+    this.currentFoodsStorage.currentFoods = this.foods.slice(0, 5);
   }
   back() {
     this.location.back();
   }
-  handlePageEvnt(e: PageEvent) {
-    this.getFoodByPageIdx(e.pageIndex);
-  }
-  private getFoodByPageIdx(pageNumber: number): void {
-    const to = (pageNumber + 1) * 5;
-    const from = to >= 5 ? to - 5 : to - pageNumber;
-    this.currentFoods = this.foods.slice(from, to);
-  }
+
 }

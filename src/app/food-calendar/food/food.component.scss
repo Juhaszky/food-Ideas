@@ -1,11 +1,28 @@
 .food-row {
-    background-color: rgb(185, 185, 185);
+    background-color: rgb(223, 223, 223);
     padding: 1rem;
-    margin-bottom: 1rem;
-    margin-top: 1rem;
+    margin: 1rem 0;
     border-radius: 1rem;
 }
 .container-fluid {
     min-height: 50rem;
     min-width: 80vw;
 }
+
+@keyframes bounceAnimation {
+    0%, 20%, 50%, 80%, 100% {
+      transform: translateX(0);
+    }
+  
+    40% {
+      transform: translateX(-20px);
+    }
+  
+    60% {
+      transform: translateX(-10px);
+    }
+  }
+  
+  .bounce {
+    animation: bounceAnimation 1s ease;
+  }
