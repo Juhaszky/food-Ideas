@@ -1,37 +1,43 @@
-<div class="container-fluid">
-  <loader></loader>
-  <div *ngIf="!(loaderService.globalSpinner$ | async)" class="box">
+<loader></loader>
+<ng-container *ngIf="!(loaderService.globalSpinner$ | async)">
+  <div class="container-fluid">
     <div class="row">
-      <h1>Foods on day:</h1>
-    </div>
-    <div class="row">
-      <div class="col-lg-2">
-        <button (click)="back()">Go->back</button>
-      </div>
-    </div>
-    <div class="row justify-content-center food-box">
-      <div *ngIf="day.foods.length > 0" class="col-md-6 col-xs-12">
-        <div class="food-box">
-          <div *ngFor="let food of currentFoods" class="row food-row">
-            <h5>{{ food.name }}</h5>
-            <p *ngFor="let ingredient of food.ingredients">
-              {{ ingredient.name }} - {{ ingredient.amount }}
-            </p>
+      <div class="col-lg-6">
+        <div class="box">
+          <div class="row">
+            <div class="col-sm-12 col-lg-2">
+              <button (click)="back()">Go->back</button>
+            </div>
+          </div>
+          <div class="row justify-content-center food-box">
+            <div *ngIf="foods.length > 0" class="col-md-6 col-xs-12">
+              <div class="food-box">
+                <div *ngFor="let food of currentFoods" class="row food-row">
+                  <h5>{{ food.name }}</h5>
+                  <p *ngFor="let ingredient of food.ingredients">
+                    {{ ingredient.name }} - {{ ingredient.amount }}
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="currentFoods && currentFoods.length === 0">
+              No food available.
+            </div>
           </div>
         </div>
       </div>
-      <div *ngIf="currentFoods && currentFoods.length === 0">
-        No food available.
+      <div class="col-sm-12 col-lg-4">
+        <app-create-food></app-create-food>
       </div>
     </div>
   </div>
-</div>
-<div *ngIf="day.foods.length > 0">
-  <mat-paginator
-    (page)="handlePageEvnt($event)"
-    [length]="day.foods.length"
-    [pageSize]="5"
-    [pageSizeOptions]="[5]"
-    aria-label="Select page">
-  </mat-paginator>
-</div>
+  <div *ngIf="foods.length > 0">
+    <mat-paginator
+      (page)="handlePageEvnt($event)"
+      [length]="foods.length"
+      [pageSize]="5"
+      [pageSizeOptions]="[5]"
+      aria-label="Select page">
+    </mat-paginator>
+  </div>
+</ng-container>

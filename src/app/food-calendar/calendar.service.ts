@@ -40,23 +40,11 @@ export class CalendarService {
     for (let i = 1; i <= daysInMonth; i++) {
       const dayDate = new Date(date.getFullYear(), date.getMonth(), i);
       const foods: Food[] = [];
-
-      const foodAmount = this.generateRandomFoodAmount();
-      for (let i = 0; i < foodAmount; i++) {
-        const food: Food = {
-          name: 'Teszt Kaja',
-          ingredients: [{ name: 'Paradicsom', amount: 1 }],
-        };
-        foods.push(food);
-      }
       days.push({ date: dayDate, foods });
     }
     return days;
   }
-  private generateRandomFoodAmount() {
-    const rnd = Math.floor(Math.random() * 15);
-    return rnd;
-  }
+
   private getDaysInMonth(date: Date): number {
     const lastDayOfMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0);
     return lastDayOfMonth.getDate();

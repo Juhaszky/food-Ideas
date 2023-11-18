@@ -21,6 +21,6 @@ export class CalendarBoxComponent {
 
   selectDay() {
     const date = JSON.stringify(this.day.date);
-    this.router.navigate(['/food', JSON.stringify(this.day)]);
+    this.router.navigate(['/food', date]);
   }
 }

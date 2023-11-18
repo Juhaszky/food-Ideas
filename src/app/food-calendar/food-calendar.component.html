@@ -1,13 +1,13 @@
 <!-- <div class="container-fluid"> -->
-  <div class="p-2">
-
-  
+<div class="p-2">
   <div class="row justify-content-center">
     <div class="col-md-6 col-sm-12">
       <div class="row">
         <mat-form-field>
           <mat-label>Choose a Month!</mat-label>
-          <mat-select (selectionChange)="onChange($event)" [(value)]="selectedMonthIdx" >
+          <mat-select
+            (selectionChange)="onChange($event)"
+            [(value)]="selectedMonthIdx">
             <mat-option
               *ngFor="let month of calendarData; index as i"
               [value]="i"
@@ -26,7 +26,6 @@
       [day]="day"
       class="p-2 calendar-day box"
       [style.flexBasis.%]="100 / 7"
-      
       matTooltip="{{ day.date }}"></app-calendar-box>
   </div>
 </div>

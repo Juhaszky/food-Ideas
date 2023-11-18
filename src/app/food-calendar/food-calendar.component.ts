@@ -29,9 +29,6 @@ export class FoodCalendarComponent implements OnInit, OnDestroy {
   constructor(private calendarService: CalendarService) {}
 
   ngOnInit(): void {
-    this.calendarService.daySelect.asObservable().subscribe((day) => {
-      console.log(day);
-    });
     const sub = this.calendarService
       .generateMonths()
       .subscribe(months => (this.calendarData = months));
